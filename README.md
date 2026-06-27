@@ -1,72 +1,101 @@
-# MUN VI — Model United Nations, Sixth Edition
+# WISMUN 2K26 — Witty International Model United Nations
 
-A React website for the 6th Edition of the Model United Nations conference.
+React website for WISMUN 2K26, the Sixth Edition of the Witty International Model United Nations.
 
-## Pages
+---
 
-| Route | Description |
-|-------|-------------|
-| `/` | Home — hero, stats, about, committees overview, CTA |
-| `/register` | Delegate registration form with validation |
-| `/brochure` | Full programme: committees, schedule, rules, FAQs |
-| `/contact` | Team contacts + inquiry form |
+## ⚠️ One-time setup before deploying
 
-## Tech Stack
+Open `package.json` and edit this line:
 
-- **React 18** with React Router v6
-- **CSS custom properties** (no Tailwind / CSS-in-JS)
-- Google Fonts: Playfair Display, Inter, Space Mono
-- No external UI libraries
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm start
-
-# Build for production
-npm run build
+```json
+"homepage": "https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPO-NAME"
 ```
 
-## Project Structure
+Replace `YOUR-GITHUB-USERNAME` with your GitHub username and `YOUR-REPO-NAME` with the exact name of your GitHub repository.
 
-```
-src/
-├── App.js                  # Router + layout shell
-├── index.js                # React entry point
-├── index.css               # Global styles & design tokens
-├── components/
-│   ├── Navbar.js / .css    # Fixed navigation bar
-│   └── Footer.js / .css    # Site footer
-└── pages/
-    ├── Home.js / .css      # Landing page
-    ├── Register.js / .css  # Registration form
-    ├── Brochure.js / .css  # Conference brochure
-    └── Contact.js / .css   # Contact page
-```
-
-## Customisation
-
-- Update conference dates, venue, and pricing in the relevant page files.
-- Replace placeholder emails (`secretariat@munvi.org`, etc.) with real addresses.
-- Add the real committee topics once finalised.
-- Connect the forms to a backend / email service (e.g. EmailJS, Formspree, or a custom API).
-
-## Deployment
-
-Works with any static host — Vercel, Netlify, GitHub Pages.
-
-For GitHub Pages, add `"homepage": "https://<your-org>.github.io/<repo-name>"` to `package.json` and run:
-
-```bash
-npm install --save-dev gh-pages
-npm run build
-npx gh-pages -d build
+**Example:**
+```json
+"homepage": "https://wismunofficial.github.io/wismun-website"
 ```
 
 ---
 
-MUN VI — Where global minds converge.
+## Deploying to GitHub Pages
+
+### Option A — Automatic (recommended)
+
+This repo includes a GitHub Actions workflow (`.github/workflows/deploy.yml`).
+Every time you push to `main`, it builds the site and deploys it automatically.
+
+**Steps:**
+1. Edit `homepage` in `package.json` (see above)
+2. Push your code to GitHub
+3. Go to your repo on GitHub → **Settings** → **Pages**
+4. Under **Source**, select **Deploy from a branch**
+5. Set the branch to `gh-pages` and folder to `/ (root)` → click **Save**
+6. Wait ~1 minute → your site will be live at your homepage URL
+
+From now on, just push to `main` and the site updates automatically.
+
+---
+
+### Option B — Manual deploy
+
+Run these commands in your terminal:
+
+```bash
+npm install
+npm run deploy
+```
+
+Then on GitHub → Settings → Pages → set source to `gh-pages` branch → Save.
+
+---
+
+## Local development
+
+```bash
+npm install
+npm start
+```
+
+Opens at `http://localhost:3000`
+
+---
+
+## Project structure
+
+```
+mun-website/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml        ← Auto-deploy on push to main
+├── public/
+│   └── index.html
+├── src/
+│   ├── App.js                ← HashRouter (required for GitHub Pages)
+│   ├── index.js
+│   ├── index.css             ← Global styles & design tokens
+│   ├── components/
+│   │   ├── Navbar.js / .css
+│   │   └── Footer.js / .css
+│   └── pages/
+│       ├── Home.js / .css
+│       ├── Register.js / .css
+│       ├── Brochure.js / .css
+│       └── Contact.js / .css
+├── package.json              ← Set homepage here before deploying
+└── README.md
+```
+
+## Why HashRouter?
+
+GitHub Pages is a static file host — it can only serve files that physically exist.
+`BrowserRouter` uses URLs like `/register` which GitHub Pages can't resolve (it returns a 404 because there's no `register/index.html` file).
+
+`HashRouter` uses `/#/register` — everything after `#` is handled by the browser, not the server, so GitHub Pages works perfectly.
+
+---
+
+WISMUN 2K26 · Witty International Model United Nations · Sixth Edition
